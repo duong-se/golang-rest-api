@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,56 +8,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Person Type
-type Person struct {
-	ID        string   `json:"id,omitempty"`
-	Firstname string   `json:"firstname,omitempty"`
-	Lastname  string   `json:"lastname,omitempty"`
-	Address   *Address `json:"address,omitempty"`
-}
-
-// Address Type
-type Address struct {
-	City  string `json:"city,omitempty"`
-	State string `json:"state,omitempty"`
-}
-
 var people []Person
-
-// GetPeople function to get People
-func GetPeople(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(people)
-}
-
-// GetPerson function to get People
-func GetPerson(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	for _, item := range people {
-		if item.ID == params["id"] {
-			json.NewEncoder(w).Encode(item)
-		}
-	}
-}
-
-// CreatePerson function to get People
-func CreatePerson(w http.ResponseWriter, r *http.Request) {
-	var person Person
-	_ = json.NewDecoder(r.Body).Decode(&person)
-	people = append(people, person)
-	json.NewEncoder(w).Encode(person)
-}
-
-// DeletePerson function to get People
-func DeletePerson(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	for index, item := range people {
-		if item.ID == params["id"] {
-			people = append(people[:index], people[index+1:]...)
-			break
-		}
-	}
-	json.NewEncoder(w).Encode(people)
-}
 
 func main() {
 	//append seed data
