@@ -1,7 +1,7 @@
 # Golang Rest Api Service Example
 Go lang rest api service example
 ## How To Install
-1. cd $GOPATH/src/github/
+1. cd $GOPATH/src/
 2. Bash `git clone https://github.com/tanphamhaiduong/golang-rest-api.git`
 
 ## How to Build
